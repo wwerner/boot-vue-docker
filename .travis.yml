@@ -1,0 +1,22 @@
+language: java
+
+sudo: required
+
+services:
+  - docker
+
+jdk:
+  - oraclejdk8
+
+git:
+  depth: 3
+
+before_install:
+  - chmod +x mvnw 
+
+after_success:
+  - docker build -t wernerw/boot-vue-docker .
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push wernerw/boot-vue-docker;
+    fi

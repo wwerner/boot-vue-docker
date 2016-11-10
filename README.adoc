@@ -1,0 +1,39 @@
+= Spring Boot + Vue.js + Docker Template
+
+Contains a template project with the following contents
+* Spring Boot Application with a single HTTP service
+* Enunciate for API documentation generation
+* Vue.js application with a sample component
+* Axios as http client in the UI application
+* Webpack Build for the frontend including live reload
+* Maven Build for the backend which also wraps the frontend build
+* A Dockerfile to create an image from the jar produced.
+* Travis build instructions running the maven and Docker build
+
+
+== Building
+
+. Run `npm install` in `src/main/frontend`
+. Run `mvn clean install` from the project's root to build the complete application.
+. Run `docker build -t wernerw/boot-vue-docker .` or use your own tag
+
+You now have a docker image containg your backend and your frontend.
+The generated API documentation is located at `/doc/index.html`
+
+== Running
+
+* To run the jar directly, use `java -jar target/boot-vue-docker*.jar`
+* To run inside a container on port 8080, use `docker run -p8080:8080 wernerw/boot-vue-docker`
+
+== Development
+
+Run `npm run dev` from `src/main/frontend` to run the a local dev server for UI development. The dev server will run on http://localhost:8081. It proxies the requests to backend HTTP API expected to run on http://localhost:8800/api. So you can run the backend from your IDE and the frontend in the dev server.
+
+If you run the complete package, the frontend requests will be made against `/api` on the same server.
+
+== Roadmap
+
+* [frontend] Add karma unit tests
+* [frontend] Add vue components (vuestrap or vue-material)
+* [backend] Add integration tests for the API w/ RESTAssured
+* [backend] Add coverage with jacoco
