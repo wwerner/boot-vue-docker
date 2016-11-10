@@ -1,6 +1,7 @@
 = Spring Boot + Vue.js + Docker Template
 
 Contains a template project with the following contents
+
 * Spring Boot Application with a single HTTP service
 * Enunciate for API documentation generation
 * Vue.js application with a sample component
