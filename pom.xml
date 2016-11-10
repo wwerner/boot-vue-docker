@@ -44,164 +44,165 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	<!-- Provides annotations for extending the automatically generated HTTP 
-	API documentation -->
-	<dependency>
-		<groupId>com.webcohesion.enunciate</groupId>
-		<artifactId>enunciate-core-annotations</artifactId>
-		<version>${enunciate.version}</version>
-	</dependency>
-</dependencies>
-
-<build>
-	<resources>
-		<resource>
-			<directory>src/main/resources</directory>
-			<excludes>
-				<exclude>build/**</exclude>
-				<exclude>enunciate/**</exclude>
-			</excludes>
-		</resource>
-	</resources>
-	<plugins>
-		<plugin> <!-- spring boot packaging for self contained runnable jar w/embedded tomcat -->
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-maven-plugin</artifactId>
-			<executions>
-				<execution>
-					<goals>
-						<goal>repackage</goal>
-					</goals>
-				</execution>
-			</executions>
-
-		</plugin>
-		<plugin> <!-- required to publish the HTTP API docs within the application -->
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-resources-plugin</artifactId>
-
-			<executions>
-				<execution>
-					<id>copy-ui-app</id>
-					<phase>process-classes</phase>
-					<goals>
-						<goal>copy-resources</goal>
-					</goals>
-					<configuration>
-						<outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
-						<resources>
-							<resource>
-								<directory>${project.build.directory}/ui/dist</directory>
-								<filtering>false</filtering>
-							</resource>
-						</resources>
-					</configuration>
-				</execution>
-				<execution>
-					<id>copy-resources</id>
-					<phase>process-classes</phase>
-					<goals>
-						<goal>copy-resources</goal>
-					</goals>
-					<configuration>
-						<outputDirectory>${project.build.outputDirectory}/static/doc</outputDirectory>
-						<resources>
-							<resource>
-								<directory>${project.build.directory}/apidocs</directory>
-								<filtering>false</filtering>
-							</resource>
-						</resources>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
-		<plugin> <!-- generate HTTP API documentation -->
+		<!-- Provides annotations for extending the automatically generated HTTP 
+			API documentation -->
+		<dependency>
 			<groupId>com.webcohesion.enunciate</groupId>
-			<artifactId>enunciate-slim-maven-plugin</artifactId>
+			<artifactId>enunciate-core-annotations</artifactId>
 			<version>${enunciate.version}</version>
-			<configuration>
-				<configFile>src/main/resources/enunciate/enunciate.xml</configFile>
-				<buildDir>${project.build.directory}/${project.artifactId}</buildDir>
-			</configuration>
-			<executions>
-				<execution>
-					<goals>
-						<goal>docs</goal>
-					</goals>
-					<configuration>
-						<docsDir>${project.build.directory}</docsDir>
-					</configuration>
-				</execution>
-			</executions>
-			<dependencies>
-				<dependency>
-					<groupId>com.webcohesion.enunciate</groupId>
-					<artifactId>enunciate-core-annotations</artifactId>
-					<version>${enunciate.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>com.webcohesion.enunciate</groupId>
-					<artifactId>enunciate-docs</artifactId>
-					<version>${enunciate.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>com.webcohesion.enunciate</groupId>
-					<artifactId>enunciate-jaxrs</artifactId>
-					<version>${enunciate.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>com.webcohesion.enunciate</groupId>
-					<artifactId>enunciate-jackson</artifactId>
-					<version>${enunciate.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>com.webcohesion.enunciate</groupId>
-					<artifactId>enunciate-spring-web</artifactId>
-					<version>${enunciate.version}</version>
-				</dependency>
-			</dependencies>
-		</plugin>
-		<plugin>  <!-- runs the frontend build and downloads the required dependencies -->
-			<groupId>com.github.eirslett</groupId>
-			<artifactId>frontend-maven-plugin</artifactId>
-			<version>1.2</version>
-			<configuration>
-				<workingDirectory>src/main/frontend</workingDirectory>
-				<installDirectory>target/ui</installDirectory>
-			</configuration>
-			<executions>
-				<execution>
-					<id>install node and npm</id>
-					<goals>
-						<goal>install-node-and-npm</goal>
-					</goals>
-					<configuration>
-						<nodeVersion>v6.9.1</nodeVersion>
-						<npmVersion>3.10.8</npmVersion>
-					</configuration>
-				</execution>
-				<execution>
-					<id>npm install</id>
-					<goals>
-						<goal>npm</goal>
-					</goals>
-					<configuration>
-						<arguments>install</arguments>
-					</configuration>
-				</execution>
-				<execution>
-					<id>npm run build</id>
-					<goals>
-						<goal>npm</goal>
-					</goals>
-					<configuration>
-						<arguments>run build</arguments>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
-	</plugins>
-</build>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>build/**</exclude>
+					<exclude>enunciate/**</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin> <!-- spring boot packaging for self contained runnable jar w/embedded tomcat -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+
+			</plugin>
+			<plugin> <!-- required to publish the HTTP API docs within the application -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>copy-ui-app</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/ui/dist</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-resources</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}/static/doc</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/apidocs</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin> <!-- generate HTTP API documentation -->
+				<groupId>com.webcohesion.enunciate</groupId>
+				<artifactId>enunciate-slim-maven-plugin</artifactId>
+				<version>${enunciate.version}</version>
+				<configuration>
+					<configFile>src/main/resources/enunciate/enunciate.xml</configFile>
+					<buildDir>${project.build.directory}/${project.artifactId}</buildDir>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>docs</goal>
+						</goals>
+						<configuration>
+							<docsDir>${project.build.directory}</docsDir>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.webcohesion.enunciate</groupId>
+						<artifactId>enunciate-core-annotations</artifactId>
+						<version>${enunciate.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.webcohesion.enunciate</groupId>
+						<artifactId>enunciate-docs</artifactId>
+						<version>${enunciate.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.webcohesion.enunciate</groupId>
+						<artifactId>enunciate-jaxrs</artifactId>
+						<version>${enunciate.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.webcohesion.enunciate</groupId>
+						<artifactId>enunciate-jackson</artifactId>
+						<version>${enunciate.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.webcohesion.enunciate</groupId>
+						<artifactId>enunciate-spring-web</artifactId>
+						<version>${enunciate.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>  <!-- runs the frontend build and downloads the required dependencies -->
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.2</version>
+				<configuration>
+					<workingDirectory>src/main/frontend</workingDirectory>
+					<installDirectory>target/ui</installDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v6.9.1</nodeVersion>
+							<npmVersion>3.10.8</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 
 </project>
