@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wwerner/boot-vue-docker.svg?branch=master)](https://travis-ci.org/wwerner/boot-vue-docker)
+
 = Spring Boot + Vue.js + Docker Template
 
 Contains a template project with the following contents
