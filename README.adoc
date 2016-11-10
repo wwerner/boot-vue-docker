@@ -40,4 +40,5 @@ If you run the complete package, the frontend requests will be made against `/ap
 * [frontend] Add vue components (vuestrap or vue-material)
 * [backend] Add integration tests for the API w/ RESTAssured
 * [backend] Add coverage with jacoco
+* [backend] Implement ports and adapter/ring architecture with example domain, repository, http and JPA adapters 
 * [build] Replace enunciate with swagger?
