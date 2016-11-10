@@ -23,6 +23,8 @@ Contains a template project with the following contents
 You now have a docker image containg your backend and your frontend.
 The generated API documentation is located at `/doc/index.html`
 
+The docker image is pushed to https://hub.docker.com/r/wernerw/boot-vue-docker/
+
 == Running
 
 * To run the jar directly, use `java -jar target/boot-vue-docker*.jar`
