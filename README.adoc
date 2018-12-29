@@ -1,5 +1,7 @@
 image:https://travis-ci.org/wwerner/boot-vue-docker.svg?branch=master["Build Status", link="https://travis-ci.org/wwerner/boot-vue-docker"]
 
+WARNING: This is grossly outdated, you shouldn't use it as is. I'll probably update it to use Spring Boot 2 & a vue cli 3 based frontend project, but this is not a priority for me ATM.
+
 = Spring Boot + Vue.js + Docker Template
 
 Contains a template project with the following contents
