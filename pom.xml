@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>net.wolfgangwerner.examples</groupId>
 	<artifactId>boot-vue-docker</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>boot-vue-docker</name>
 	<description>Demo project for Spring Boot</description>
 

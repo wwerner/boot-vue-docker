@@ -1,4 +1,4 @@
-FROM java:8
+FROM openjdk:11-slim
 VOLUME /tmp
 ADD target/boot-vue-docker*.jar app.jar
 EXPOSE 8080
