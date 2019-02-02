@@ -1,4 +1,4 @@
-package net.wolfgangwerner.examples.bootvuedocker;
+package net.wolfgangwerner.examples.bvd;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
