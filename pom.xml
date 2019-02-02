@@ -48,13 +48,13 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<plugin>  <!-- runs the frontend build and downloads the required dependencies -->
+			<plugin>  <!-- runs the frontend build after downloading the required dependencies -->
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.6</version>
 				<configuration>
 					<workingDirectory>src/main/frontend</workingDirectory>
-					<installDirectory>target/ui</installDirectory>
+					<installDirectory>target/frontend</installDirectory>
 				</configuration>
 				<executions>
 					<execution>
@@ -85,7 +85,31 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>		</plugins>
+			</plugin>
+			<plugin> <!-- put the built UI into boot's static folder -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>copy-ui-app</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/frontend/dist</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>
