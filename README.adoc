@@ -19,6 +19,7 @@ The following frameworks where used:
 * Spring Boot v2
 * Vue.js v2 / Vue CLI 3
 * vue-router and vuex
+* SCSS styling support
 * Docker w/ a minimal JRE 11 base image based on alpine
 
 
