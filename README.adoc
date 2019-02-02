@@ -1,28 +1,38 @@
-image:https://travis-ci.org/wwerner/boot-vue-docker.svg?branch=master["Build Status", link="https://travis-ci.org/wwerner/boot-vue-docker"]
-
-WARNING: This is grossly outdated, you shouldn't use it as is. I'll probably update it to use Spring Boot 2 & a vue cli 3 based frontend project, but this is not a priority for me ATM.
+:experimental:
+:toc:
 
 = Spring Boot + Vue.js + Docker Template
 
 Contains a template project with the following contents
 
 * Spring Boot Application with a single HTTP service
-* Enunciate for API documentation generation
+*
 * Vue.js application with a sample component
-* Axios as http client in the UI application
-* Webpack Build for the frontend including live reload
+* Webpack Build for the frontend including live reload for development
+* API Proxy for the local frontend development server to target the locally running backend
 * Maven Build for the backend which also wraps the frontend build
 * A Dockerfile to create an image from the jar produced.
 * Travis build instructions running the maven and Docker build
 
+The following frameworks where used:
+
+* Spring Boot v2
+* Vue.js v2 / Vue CLI 3
+* vue-router and vuex
+* SCSS styling support
+* Docker w/ a minimal JRE 11 base image based on alpine
+
+
+TODO:
+* Contract first implementation using swagger, generated server interfaces and JS client.
+* CircleCI build, as I prefer it to Travis these days
 
 == Building
 
-. Run `npm install` in `src/main/frontend`
 . Run `mvn clean install` from the project's root to build the complete application.
 . Run `docker build -t wernerw/boot-vue-docker .` or use your own tag
 
-You now have a docker image containg your backend and your frontend.
+You now have a docker image containig your backend and your frontend.
 The generated API documentation is located at `/doc/index.html`
 
 The docker image is pushed to https://hub.docker.com/r/wernerw/boot-vue-docker/
@@ -34,15 +44,14 @@ The docker image is pushed to https://hub.docker.com/r/wernerw/boot-vue-docker/
 
 == Development
 
-Run `npm run dev` from `src/main/frontend` to run the a local dev server for UI development. The dev server will run on http://localhost:8081. It proxies the requests to backend HTTP API expected to run on http://localhost:8800/api. So you can run the backend from your IDE and the frontend in the dev server.
+=== Frontend
+
+Run `npm run serve` from `src/main/frontend` to run the a local dev server for UI development.
+The dev server will run on http://localhost:8081.
+It proxies the requests to backend HTTP API expected to run on http://localhost:8080/api.
+So you can run the backend from your IDE and the frontend in the dev server.
 
 If you run the complete package, the frontend requests will be made against `/api` on the same server.
 
-== Roadmap
-
-* [frontend] Add karma unit tests
-* [frontend] Add vue components (vuestrap or vue-material)
-* [backend] Add integration tests for the API w/ RESTAssured
-* [backend] Add coverage with jacoco
-* [backend] Implement ports and adapter/ring architecture with example domain, repository, http and JPA adapters 
-* [build] Replace enunciate with swagger?
+If you are using IntelliJ/WebStorm, you need to configure the path to the webpack config that is provided by vue-cli for webpack aliases (i.e. `@` for `src`) to work.
+menu:Preferences[Webpack > webpack configuration file > `<project root>//src/main/frontend/node_modules/@vue/cli-service/webpack.config.js`]
