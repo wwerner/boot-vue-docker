@@ -6,13 +6,13 @@ services:
   - docker
 
 jdk:
-  - oraclejdk8
+  - openjdk11
 
 git:
   depth: 3
 
 before_install:
-  - chmod +x mvnw 
+  - chmod +x mvnw
 
 after_success:
   - docker build -t wernerw/boot-vue-docker .
