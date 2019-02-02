@@ -25,6 +25,7 @@ The following frameworks where used:
 
 TODO:
 * Contract first implementation using swagger, generated server interfaces and JS client.
+* CircleCI build, as I prefer it to Travis these days
 
 == Building
 
