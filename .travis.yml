@@ -16,7 +16,9 @@ before_install:
 
 after_success:
   - docker build -t wernerw/boot-vue-docker .
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      docker push wernerw/boot-vue-docker;
-    fi
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
