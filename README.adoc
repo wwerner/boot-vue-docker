@@ -1,3 +1,6 @@
+:experimental:
+:toc:
+
 = Spring Boot + Vue.js + Docker Template
 
 Contains a template project with the following contents
@@ -6,6 +9,7 @@ Contains a template project with the following contents
 *
 * Vue.js application with a sample component
 * Webpack Build for the frontend including live reload for development
+* API Proxy for the local frontend development server to target the locally running backend
 * Maven Build for the backend which also wraps the frontend build
 * A Dockerfile to create an image from the jar produced.
 * Travis build instructions running the maven and Docker build
@@ -14,7 +18,9 @@ The following frameworks where used:
 
 * Spring Boot v2
 * Vue.js v2 / Vue CLI 3
+* vue-router and vuex
 * Docker w/ a minimal JRE 11 base image based on alpine
+
 
 TODO:
 * Contract first implementation using swagger, generated server interfaces and JS client.
@@ -38,6 +44,12 @@ The docker image is pushed to https://hub.docker.com/r/wernerw/boot-vue-docker/
 
 === Frontend
 
-Run `npm run serve` from `src/main/frontend` to run the a local dev server for UI development. The dev server will run on http://localhost:8081. It proxies the requests to backend HTTP API expected to run on http://localhost:8800/api. So you can run the backend from your IDE and the frontend in the dev server.
+Run `npm run serve` from `src/main/frontend` to run the a local dev server for UI development.
+The dev server will run on http://localhost:8081.
+It proxies the requests to backend HTTP API expected to run on http://localhost:8080/api.
+So you can run the backend from your IDE and the frontend in the dev server.
 
 If you run the complete package, the frontend requests will be made against `/api` on the same server.
+
+If you are using IntelliJ/WebStorm, you need to configure the path to the webpack config that is provided by vue-cli for webpack aliases (i.e. `@` for `src`) to work.
+menu:Preferences[Webpack > webpack configuration file > `<project root>//src/main/frontend/node_modules/@vue/cli-service/webpack.config.js`]
