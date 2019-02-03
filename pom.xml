@@ -53,7 +53,39 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
+			<plugin> <!-- generate JS client and Spring server stubs using the open API spec in resources -->
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>3.3.4</version>
+				<executions>
+					<execution>
+						<id>oai-gen-server-java</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+							<generatorName>kotlin-spring</generatorName>
+							<configOptions>
+								<serviceInterface>true</serviceInterface>
+								<serviceImplementation>false</serviceImplementation>
+							</configOptions>
+						</configuration>
+					</execution>
+					<execution>
+						<id>oai-gen-client-ts</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+							<generatorName>typescript-axios</generatorName>
+							<configOptions>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>  <!-- runs the frontend build after downloading the required dependencies -->
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
