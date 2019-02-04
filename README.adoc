@@ -3,10 +3,9 @@
 
 = Spring Boot + Vue.js + Docker Template
 
-Contains a template project with the following contents
+Minimal example of an app running Spring Boot in the backend with a Vue.js SPA as frontend.
 
 * Spring Boot Application with a single HTTP service
-*
 * Vue.js application with a sample component
 * Webpack Build for the frontend including live reload for development
 * API Proxy for the local frontend development server to target the locally running backend
@@ -23,7 +22,8 @@ The following frameworks where used:
 * Docker w/ a minimal JRE 11 base image based on alpine
 
 
-TODO:
+TODO
+
 * Contract first implementation using swagger, generated server interfaces and JS client.
 * CircleCI build, as I prefer it to Travis these days
 
@@ -54,4 +54,4 @@ So you can run the backend from your IDE and the frontend in the dev server.
 If you run the complete package, the frontend requests will be made against `/api` on the same server.
 
 If you are using IntelliJ/WebStorm, you need to configure the path to the webpack config that is provided by vue-cli for webpack aliases (i.e. `@` for `src`) to work.
-menu:Preferences[Webpack > webpack configuration file > `<project root>//src/main/frontend/node_modules/@vue/cli-service/webpack.config.js`]
+menu:Preferences[Webpack > webpack configuration file > `<project root>/src/main/frontend/node_modules/@vue/cli-service/webpack.config.js`]
